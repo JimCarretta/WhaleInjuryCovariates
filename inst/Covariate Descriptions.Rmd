@@ -2,9 +2,7 @@
 title: 'Covariate Names + Definitions : Package WhaleInjuryCovariates()'
 author: "jim.carretta@noaa.gov"
 date: "7/28/2021"
-
 output: html_document
----
 
 <H2>Covariate names:</H2>
 
@@ -68,6 +66,7 @@ output: html_document
 <H4><b>*wraps.no*</b></H4>
 <p>Narrative includes reference to a whale without any wraps of line or gear around body or appendage.</p>
 
+
 ```
 # Example covariate coding from narratives.
 # Covariates are identified from injury narratives (data.frame field must be named 'Narrative'),
@@ -77,8 +76,9 @@ output: html_document
 # Evidence of a health decline? Search field 'Narrative' for words/phrases associated with health declines.
 
     decline <- grepl(" abnormal|chronic|deteriorat|fair|compromise|scoliosis|deform|cyamid|
-    lice|lethargic|lesion|discolor|diatom|poor cond|poor health|poor body|poor over|
-    poor skin|rake|skin|slough|thin |emaciated|malnourish|underweight|
+    
+    decline = grepl("   abnormal|chronic|deteriorat|fair|compromise|scoliosis|deform|cyamid|
+    lice|lethargic|lesion|discolor|diatom|poor cond|poor health|poor body|poor over|poor skin|rake|skin|slough|thin |emaciated|malnourish|underweight|
     starv|mobility", LargeWhaleData$Narrative, ignore.case=T)
     
     decline <- as.numeric(lapply(decline, as.numeric))
@@ -93,3 +93,4 @@ output: html_document
     head(new.data.frame)
     
 ```
+
