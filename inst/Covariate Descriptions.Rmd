@@ -1,10 +1,13 @@
 ---
-title: 'Covariate Names + Definitions : Package WhaleInjuryCovariates()'
+title: 'R-Package WhaleInjuryCovariates <br><br> Covariates for assessing whale injuries'
 author: "jim.carretta@noaa.gov"
-date: "7/28/2021"
+date: "7/29/2021"
 output: html_document
+---
+GitHub Repository: https:GitHub.com/JimCarretta/WhaleInjuryCovariates
+<br>
 
-<H2>Covariate names:</H2>
+<H3>Covariates:</H3> <br>
 
 <H4><b>*anchored*</b></H4>
 <p>Evidence a whale was anchored or immobilized by                                entangling material or gear.  Narrative mentions                                  inability to dive or swim or that whale is                                        immobilized. Includes references to a                                             heavily-weighted whale with multiple pots/traps                                   impeding normal movement.</p>
@@ -65,26 +68,40 @@ output: html_document
 
 <H4><b>*wraps.no*</b></H4>
 <p>Narrative includes reference to a whale without any wraps of line or gear around body or appendage.</p>
+<p>
 
+<br>
+
+Code example below shows how injury case narratives are searched for words/phrases 
+used to generate covariates. A single covariate example ('decline') is given. Code 
+for generating all covariates is found in the file 'Large Whale Injury Covariates.R' 
+in the R-Package 'WhaleInjuryCovariates'.
+Package includes sample data.frame 'LargeWhaleData'.
 
 ```
-# Example covariate coding from narratives.
-# Covariates are identified from injury narratives (data.frame field must be named 'Narrative'),
-# using function grepl to assign TRUE/FALSE to presence/absence of words or phrases in narrative.
-# Covariates are then coded numerically as 1/0, aligned with their TRUE/FALSE value.
+# Download R-Package 'WhaleInjuryCovariates':
 
-# Evidence of a health decline? Search field 'Narrative' for words/phrases associated with health declines.
+ devtools::install_github('JimCarretta/WhaleInjuryCovariates')
 
-    decline <- grepl(" abnormal|chronic|deteriorat|fair|compromise|scoliosis|deform|cyamid|
+# Example code for covariate identification from injury narratives.
+#  uses covariate 'decline' as example.
+#   data.frame narrative field must be named 'Narrative' for use with WhaleInjuryCovariates().
+#    use function 'grepl' to search for words/phrases in 'Narrative'.
+#     code covariates numerically as 1/0, aligned with their TRUE/FALSE (=presence/absence) value.
+
+# Evidence of a health decline? 
+#  Search 'Narrative' for words/phrases associated with health declines.
     
-    decline = grepl("   abnormal|chronic|deteriorat|fair|compromise|scoliosis|deform|cyamid|
-    lice|lethargic|lesion|discolor|diatom|poor cond|poor health|poor body|poor over|poor skin|rake|skin|slough|thin |emaciated|malnourish|underweight|
-    starv|mobility", LargeWhaleData$Narrative, ignore.case=T)
+    decline <- grepl(" abnormal|chronic|deteriorat|fair|
+     compromise|scoliosis|deform|cyamid|lice|lethargic|
+      lesion|discolor|diatom|poor cond|poor health|poor body|
+       poor over|poor skin|rake|skin|slough|thin |emaciated|malnourish|
+        underweight|starv|mobility", LargeWhaleData$Narrative, ignore.case=T)
     
     decline <- as.numeric(lapply(decline, as.numeric))
-    decline
+     decline
     
-# Use WhaleInjuryCovariates() to append covariates to each row of LargeWhaleData...   
+# Use WhaleInjuryCovariates() to append covariates to each row of 'LargeWhaleData' 
     
     head(LargeWhaleData)
 
