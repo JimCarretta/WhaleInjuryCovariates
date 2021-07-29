@@ -1,11 +1,10 @@
 ---
-title: 'R-Package WhaleInjuryCovariates <br><br> Covariates for assessing whale injuries'
+title: 'R-Package WhaleInjuryCovariates <br><br> Covariates for assessing whale injuries <br><br> GitHub Repository: https:GitHub.com/JimCarretta/WhaleInjuryCovariates'
 author: "jim.carretta@noaa.gov"
 date: "7/29/2021"
 output: html_document
 ---
-GitHub Repository: https:GitHub.com/JimCarretta/WhaleInjuryCovariates
-<br>
+
 
 <H3>Covariates:</H3> <br>
 
@@ -83,6 +82,7 @@ Package includes sample data.frame 'LargeWhaleData'.
 
  devtools::install_github('JimCarretta/WhaleInjuryCovariates')
 
+<<<<<<< HEAD
 # Example code for covariate identification from injury narratives.
 #  uses covariate 'decline' as example.
 #   data.frame narrative field must be named 'Narrative' for use with WhaleInjuryCovariates().
@@ -91,6 +91,9 @@ Package includes sample data.frame 'LargeWhaleData'.
 
 # Evidence of a health decline? 
 #  Search 'Narrative' for words/phrases associated with health declines.
+=======
+# Evidence of a health decline? Search field 'Narrative' for words/phrases associated with health declines.
+>>>>>>> 5a9d5436e42233e2117f7d852288b7125771ea82
     
     decline <- grepl(" abnormal|chronic|deteriorat|fair|
      compromise|scoliosis|deform|cyamid|lice|lethargic|
