@@ -4,9 +4,17 @@ author: "jim.carretta@noaa.gov"
 date: "7/29/2021"
 output: html_document
 ---
+<<<<<<< HEAD
 
 GitHub Repository: https:GitHub.com/JimCarretta/WhaleInjuryCovariates
 <br>
+=======
+<<<<<<< HEAD
+GitHub Repository: https:GitHub.com/JimCarretta/WhaleInjuryCovariates
+<br>
+=======
+>>>>>>> 5a9d5436e42233e2117f7d852288b7125771ea82
+>>>>>>> 5d215a9d0b839f68f828a648c2d0c08a7af136dd
 
 <H3>Covariates:</H3> <br>
 
@@ -84,7 +92,6 @@ Package includes sample data.frame 'LargeWhaleData'.
 
  devtools::install_github('JimCarretta/WhaleInjuryCovariates')
 
-<<<<<<< HEAD
 # Example code for covariate identification from injury narratives.
 #  uses covariate 'decline' as example.
 #   data.frame narrative field must be named 'Narrative' for use with WhaleInjuryCovariates().

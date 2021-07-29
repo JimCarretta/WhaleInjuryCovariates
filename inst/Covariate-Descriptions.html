@@ -166,16 +166,13 @@ pre code {
 
 <h1 class="title toc-ignore">R-Package WhaleInjuryCovariates <br><br> Covariates for assessing whale injuries</h1>
 <h4 class="author"><a href="mailto:jim.carretta@noaa.gov" class="email">jim.carretta@noaa.gov</a></h4>
-<<<<<<< HEAD
 <h4 class="date">7/29/2021</h4>
-=======
-<h4 class="date">7/28/2021</h4>
->>>>>>> 5a9d5436e42233e2117f7d852288b7125771ea82
 
 </div>
 
 
-<p>GitHub Repository: <a href="https:GitHub.com/JimCarretta/WhaleInjuryCovariates" class="uri">https:GitHub.com/JimCarretta/WhaleInjuryCovariates</a> <br></p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<p>GitHub Repository: <a href="https:GitHub.com/JimCarretta/WhaleInjuryCovariates" class="uri">https:GitHub.com/JimCarretta/WhaleInjuryCovariates</a> <br> ======= &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD GitHub Repository: <a href="https:GitHub.com/JimCarretta/WhaleInjuryCovariates" class="uri">https:GitHub.com/JimCarretta/WhaleInjuryCovariates</a> <br> ======= &gt;&gt;&gt;&gt;&gt;&gt;&gt; 5a9d5436e42233e2117f7d852288b7125771ea82 &gt;&gt;&gt;&gt;&gt;&gt;&gt; 5d215a9d0b839f68f828a648c2d0c08a7af136dd</p>
 <H3>
 Covariates:
 </H3>
@@ -302,7 +299,6 @@ Narrative includes reference to a whale without any wraps of line or gear around
 </p>
 <p>
 <p><br></p>
-<<<<<<< HEAD
 <p>Code example below shows how injury case narratives are searched for words/phrases used to generate covariates. A single covariate example (‘decline’) is given. Code for generating all covariates is found in the file ‘Large Whale Injury Covariates.R’ in the R-Package ‘WhaleInjuryCovariates’. Package includes sample data.frame ‘LargeWhaleData’.</p>
 <pre><code># Download R-Package &#39;WhaleInjuryCovariates&#39;:
 
@@ -316,20 +312,9 @@ Narrative includes reference to a whale without any wraps of line or gear around
 
 # Evidence of a health decline? 
 #  Search &#39;Narrative&#39; for words/phrases associated with health declines.
-    
-    decline &lt;- grepl(&quot; abnormal|chronic|deteriorat|fair|
-     compromise|scoliosis|deform|cyamid|lice|lethargic|
-      lesion|discolor|diatom|poor cond|poor health|poor body|
-       poor over|poor skin|rake|skin|slough|thin |emaciated|malnourish|
-        underweight|starv|mobility&quot;, LargeWhaleData$Narrative, ignore.case=T)
-    
 =======
-<pre><code># Example covariate coding from narratives.
-# Covariates are identified from injury narratives (data.frame field must be named &#39;Narrative&#39;),
-# using function grepl to assign TRUE/FALSE to presence/absence of words or phrases in narrative.
-# Covariates are then coded numerically as 1/0, aligned with their TRUE/FALSE value.
-
 # Evidence of a health decline? Search field &#39;Narrative&#39; for words/phrases associated with health declines.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 5a9d5436e42233e2117f7d852288b7125771ea82
     
     decline &lt;- grepl(&quot; abnormal|chronic|deteriorat|fair|
      compromise|scoliosis|deform|cyamid|lice|lethargic|
@@ -337,7 +322,6 @@ Narrative includes reference to a whale without any wraps of line or gear around
        poor over|poor skin|rake|skin|slough|thin |emaciated|malnourish|
         underweight|starv|mobility&quot;, LargeWhaleData$Narrative, ignore.case=T)
     
->>>>>>> 5a9d5436e42233e2117f7d852288b7125771ea82
     decline &lt;- as.numeric(lapply(decline, as.numeric))
      decline
     
