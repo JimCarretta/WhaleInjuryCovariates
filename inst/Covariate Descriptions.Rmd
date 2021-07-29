@@ -3,6 +3,7 @@ title: 'Covariate Names + Definitions : Package WhaleInjuryCovariates()'
 author: "jim.carretta@noaa.gov"
 date: "7/28/2021"
 output: html_document
+---
 
 <H2>Covariate names:</H2>
 
@@ -65,6 +66,9 @@ output: html_document
 
 <H4><b>*wraps.no*</b></H4>
 <p>Narrative includes reference to a whale without any wraps of line or gear around body or appendage.</p>
+<p>
+
+<br>
 
 
 ```
@@ -74,15 +78,15 @@ output: html_document
 # Covariates are then coded numerically as 1/0, aligned with their TRUE/FALSE value.
 
 # Evidence of a health decline? Search field 'Narrative' for words/phrases associated with health declines.
-
-    decline <- grepl(" abnormal|chronic|deteriorat|fair|compromise|scoliosis|deform|cyamid|
     
-    decline = grepl("   abnormal|chronic|deteriorat|fair|compromise|scoliosis|deform|cyamid|
-    lice|lethargic|lesion|discolor|diatom|poor cond|poor health|poor body|poor over|poor skin|rake|skin|slough|thin |emaciated|malnourish|underweight|
-    starv|mobility", LargeWhaleData$Narrative, ignore.case=T)
+    decline <- grepl(" abnormal|chronic|deteriorat|fair|
+     compromise|scoliosis|deform|cyamid|lice|lethargic|
+      lesion|discolor|diatom|poor cond|poor health|poor body|
+       poor over|poor skin|rake|skin|slough|thin |emaciated|malnourish|
+        underweight|starv|mobility", LargeWhaleData$Narrative, ignore.case=T)
     
     decline <- as.numeric(lapply(decline, as.numeric))
-    decline
+     decline
     
 # Use WhaleInjuryCovariates() to append covariates to each row of LargeWhaleData...   
     
