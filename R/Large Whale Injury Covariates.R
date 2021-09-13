@@ -31,7 +31,7 @@
 
    WhaleInjuryCovariates = function(x) {
 
-# 7-18-2021 3:48 pm
+# 09-13-2021
 # Covariates defined below, starting with covariate = 'anchored'
 # Multiple words/phrases may be pooled into a single covariate, e.g. the covariate 'decline'
 # includes narrative words/phrases 'cyamid', 'whale lice', 'emaciation', 'skin discoloration', etc.
@@ -117,34 +117,6 @@
 # Was whale trailing gear?
        trailing = grepl("trail|towing|drag", x$Narrative, ignore.case=T)
         trailing = as.numeric(lapply(trailing, as.numeric))
-# vessel size (small or large?)
-       vessel.small = grepl("sailboat|sport|pleasure|zodiac|rhib|catamaran|recreat|rec boat|fishing|
-                            boat|smaller|engine damage|snap|vessel.<|<.*65", x$Narrative, ignore.case=T)
-        vessel.small = as.numeric(lapply(vessel.small, as.numeric))
-         vessel.large = grepl("ship|RV|dredge|navy|naval|military|ferry|carrier|cutter|yacht|larger|whale watch|WW|>.*65", x$Narrative, ignore.case=T)
-          vessel.large = as.numeric(lapply(vessel.large, as.numeric))
-# vessel speed (slow / fast? threshold used in SI protocols is 10 kts)
-# identify x$Narrative phrases / characters that identify slow and fast (<=>10 kts) vessels, respectively.
-        vessel.slow.list1 = c(paste(seq(0.1,10,0.1), "kts", sep=" "))
-        vessel.slow.list2 = c(paste(seq(0.1,10,0.1), "kts", sep=""))
-        vessel.slow.list = c(vessel.slow.list1, vessel.slow.list2)
-        vessel.slow.list = paste("", vessel.slow.list)
-        vessel.slow.list = c(paste(vessel.slow.list, collapse="|"))
-        other.vessel.slow = c("|<10kts|< 10kts|<10 kts|< 10 kts")
-        vessel.slow.list = paste(vessel.slow.list, other.vessel.slow, sep="")
-        vessel.slow = grepl(vessel.slow.list, x$Narrative, ignore.case=T)
-        vessel.slow = as.numeric(lapply(vessel.slow, as.numeric))
-
-        vessel.fast.list1 = c(paste(seq(10.1,45,0.1), "kts", sep=" "))
-        vessel.fast.list2 = c(paste(seq(10.1,45,0.1), "kts", sep=""))
-        vessel.fast.list = c(vessel.fast.list1, vessel.fast.list2)
-        vessel.fast.list = paste("", vessel.fast.list)
-        vessel.fast.list = c(paste(vessel.fast.list, collapse="|"))
-        other.vessel.fast = c("|>10kts|> 10kts|>10 kts|> 10 kts")
-        vessel.fast.list = paste(vessel.fast.list, other.vessel.fast, sep="")
-
-        vessel.fast = grepl(vessel.fast.list, x$Narrative, ignore.case=T)
-        vessel.fast = as.numeric(lapply(vessel.fast, as.numeric))
 
 # Whale has wraps of gear (none or multiple?)
 
@@ -155,9 +127,14 @@
         wraps.multi = as.numeric(lapply(wraps.multi, as.numeric))
 
 # Append covariates to data frame (x) and return appended data frame object
+      # Vessel Size and Speed function
 
-     df = cbind.data.frame(x, anchored, calf.juv, constricting, decline, extensive.severe, fluke.peduncle, gear.free, head, healing, laceration.deep,
-                                   laceration.shallow, pectoral, swim.dive, trailing, vessel.slow, vessel.fast, vessel.small, vessel.large, wraps.multi, wraps.no)
+     df = cbind.data.frame(x, anchored, calf.juv, constricting, decline, extensive.severe, fluke.peduncle, gear.free, head, healing,
+                           laceration.deep, laceration.shallow, pectoral, swim.dive, trailing, wraps.multi, wraps.no)
+
+     df <- VesselCovariates(df)
+
+     write.csv(df, "WhaleInjuryCovariates.csv", row.names=FALSE)
 
      df
 
