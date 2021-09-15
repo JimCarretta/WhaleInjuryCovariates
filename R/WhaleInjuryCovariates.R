@@ -132,7 +132,7 @@
      df = cbind.data.frame(x, anchored, calf.juv, constricting, decline, extensive.severe, fluke.peduncle, gear.free, head, healing,
                            laceration.deep, laceration.shallow, pectoral, swim.dive, trailing, wraps.multi, wraps.no)
 
-     df <- VesselCovariates(df)
+   #  df <- VesselCovariates(df)
 
      df
 
