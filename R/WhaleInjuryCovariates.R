@@ -134,8 +134,6 @@
 
      df <- VesselCovariates(df)
 
-     write.csv(df, "WhaleInjuryCovariates.csv", row.names=FALSE)
-
      df
 
      }

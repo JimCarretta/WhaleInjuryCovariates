@@ -156,14 +156,11 @@
        ## indexed first and narratives that contain matches between unknown and unknown categories are
         ## assigned the known category last (Fast supercedes Unknown and Slow, Large supercedes Unknown and Small)
 
-       Small.In.Large.conflict <- na.omit(match(VSm.ind, VLg.ind))
-       Slow.In.Fast.conflict <- na.omit(match(VSlow.ind, VFast.ind))
+       Small.In.Large.conflict <- stats::na.omit(match(VSm.ind, VLg.ind))
+       Slow.In.Fast.conflict <- stats::na.omit(match(VSlow.ind, VFast.ind))
 
        ConflictVSize <- VData[VLg.ind[Small.In.Large.conflict],]
        ConflictVSpd <- VData[VFast.ind[Slow.In.Fast.conflict],]
-
-       write.csv(cbind(ConflictVSize$Narrative, ConflictVSize$VessSz, ConflictVSize$VessSpd), "ConflictVSize.csv", row.names = F)
-       write.csv(cbind(ConflictVSpd$Narrative, ConflictVSpd$VessSz, ConflictVSpd$VessSpd),  "ConflictVSpd.csv", row.names = F)
 
     # assign unknown VessSz, VessSpd for non-vessel strike data
        VessSz <- rep("VSzUnk", nrow(NotVData))
