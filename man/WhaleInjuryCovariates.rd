@@ -13,9 +13,10 @@ WhaleInjuryCovariates(x)
 Identify Covariates for Whale Injury Assessments from
 Narratives + Append Covariates to existing data.frame.
 
-Search wide-form data.frame column named 'Narrative' for words/phrases
-to be coded as binary absence / presence (0/1) injury covariates.
-Append to new data.frame with function WhaleInjuryCovariates().
+Covariates are identified from words/phrases in field 'Narrative'.
+Presence / absence of words / phrases is used to code covariates
+as binary presence (1) or absence (0), except for vessel vessels
+coded as factors (Vessel Size and Speed: small, large, slow, fast, unknown)
 
 Resulting data.frame is used with randomForest models to predict
 health status of whales involved in entanglements or vessel strikes.
