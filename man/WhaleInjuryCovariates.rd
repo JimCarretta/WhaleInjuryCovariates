@@ -23,11 +23,11 @@ health status of whales involved in entanglements or vessel strikes.
 Package includes file 'LargeWhaleData'
 }
 \examples{
-head(LargeWhaleData)
+names(LargeWhaleData)
 
 new.data.frame <- WhaleInjuryCovariates(LargeWhaleData)
 
-head(new.data.frame)
+names(new.data.frame)
 
 }
 \author{
