@@ -121,12 +121,10 @@
         wraps.multi = grepl("multiple wraps|several wraps", x$Narrative, ignore.case=TRUE)
         wraps.multi = as.numeric(lapply(wraps.multi, as.numeric))
 
-# Append covariates to data frame (x) and return appended data frame object
-      # Vessel Size and Speed function
+        x <- cbind.data.frame(x, anchored, calf.juv, constricting, decline, extensive.severe, fluke.peduncle, gear.free, head, healing,
+                              laceration.deep, laceration.shallow, pectoral, swim.dive, trailing, wraps.multi, wraps.no)
 
-     df = cbind.data.frame(x, anchored, calf.juv, constricting, decline, extensive.severe, fluke.peduncle, gear.free, head, healing,
-                           laceration.deep, laceration.shallow, pectoral, swim.dive, trailing, wraps.multi, wraps.no)
-# VesselCovariates script starts here
+# Begin vessel strike covariate section, append covariates to current data frame
 
 # Vessel Variables (VSize and VSpeed)
 #  Archive Vessel Size and Speed strings
@@ -136,19 +134,19 @@
        all.values <- as.character(unique(as.numeric(all.values)))
        all.values <- as.numeric(sort(all.values))
 
-       # parse by vessel size (small, large) and speed (slow, fast) #####
-       # omit VSm values==5 due to grep identifying '65' (vessel size threshold) as a longer case of '5'
-       # there are no 5 ft long vessels other than kayaks and rafts, which are typically identified as such in narratives
+# parse by vessel size (small, large) and speed (slow, fast) #####
+# omit VSm values==5 due to grep identifying '65' (vessel size threshold) as a longer case of '5'
+# there are no 5 ft long vessels other than kayaks and rafts, which are typically identified as such in narratives
 
        VSm <- all.values[all.values<65 & all.values!=5]
        VLg <- all.values[all.values>=65]
 
-       # Identify data frame records identified as vessel strike cases
+# Identify data frame records identified as vessel strike cases
        VData <- x[x$CAUSE=="VS",]
        VStrike.ind <- which(x$CAUSE=="VS")
        NotVStrike.ind <- seq(1,nrow(x))[-VStrike.ind]
 
-       # create character vectors of Vsize and VSpeed for use with grep, grepl, or regexpr
+# create character vectors of Vsize and VSpeed for use with grep, grepl, or regexpr
 
        VSzUnk.strings <- c("unable to determine vessel size|vessel size unknown|
                           unknown vessel size|size of vessel undetermined|vessel size
@@ -186,8 +184,8 @@
        VSm.ind <- grep(VSm.strings, VData$Narrative, ignore.case=TRUE)
        VLg.ind <- grep(VLg.strings, VData$Narrative, ignore.case=TRUE)
 
-       # Vessel Speed descriptions / definitions
-       # VSpeed threshold is <= 10 kts and >10 kts
+# Vessel Speed descriptions / definitions
+# VSpeed threshold is <= 10 kts and >10 kts
 
        VSlow <- all.values[all.values<=10]
        VFast <- all.values[all.values>10]
@@ -258,8 +256,10 @@
        NotVData <- cbind.data.frame(NotVData, VessSz, VessSpd)
 
        df <- rbind.data.frame(VData, NotVData)
-
        df
+   }
 
-     }
+#   df = cbind.data.frame(x, anchored, calf.juv, constricting, decline, extensive.severe, fluke.peduncle, gear.free, head, healing,
+#   laceration.deep, laceration.shallow, pectoral, swim.dive, trailing, wraps.multi, wraps.no)
+
 
