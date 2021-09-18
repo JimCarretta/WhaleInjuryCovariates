@@ -21,12 +21,12 @@ coded as factors (Vessel Size and Speed: small, large, slow, fast, unknown)
 Resulting data.frame is used with randomForest models to predict
 health status of whales involved in entanglements or vessel strikes.
 
-Package includes file 'LargeWhaleData'
+Package includes data.frame 'whales'
 }
 \examples{
-names(LargeWhaleData)
+names(whales)
 
-new.data.frame <- WhaleInjuryCovariates(LargeWhaleData)
+new.data.frame <- WhaleInjuryCovariates(whales)
 
 names(new.data.frame)
 

@@ -20,13 +20,13 @@
 #'
 #' @author Jim Carretta <jim.carretta@noaa.gov>
 #'
-#' @examples WhaleInjuryCovariates(LargeWhaleData)
+#' @examples WhaleInjuryCovariates(whales)
 #'
 #' @export
 
    WhaleInjuryCovariates = function(x) {
 
-# 09-13-2021
+# 09-18-2021
 # Covariates defined below, starting with covariate = 'anchored'
 # Multiple words/phrases may be pooled into a single covariate, e.g. the covariate 'decline'
 # includes narrative words/phrases 'cyamid', 'whale lice', 'emaciation', 'skin discoloration', etc.
@@ -121,10 +121,10 @@
         wraps.multi = grepl("multiple wraps|several wraps", x$Narrative, ignore.case=TRUE)
         wraps.multi = as.numeric(lapply(wraps.multi, as.numeric))
 
-        x <- cbind.data.frame(x, anchored, calf.juv, constricting, decline, extensive.severe, fluke.peduncle, gear.free, head, healing,
-                              laceration.deep, laceration.shallow, pectoral, swim.dive, trailing, wraps.multi, wraps.no)
-
 # Begin vessel strike covariate section, append covariates to current data frame
+# Assign null Vessel Speed and Size factors as default filter to index from
+        VessSpd <- rep("VSpdUnk", nrow(x))
+        VessSz <- rep("VSzUnk", nrow(x))
 
 # Vessel Variables (VSize and VSpeed)
 #  Archive Vessel Size and Speed strings
@@ -140,11 +140,6 @@
 
        VSm <- all.values[all.values<65 & all.values!=5]
        VLg <- all.values[all.values>=65]
-
-# Identify data frame records identified as vessel strike cases
-       VData <- x[x$CAUSE=="VS",]
-       VStrike.ind <- which(x$CAUSE=="VS")
-       NotVStrike.ind <- seq(1,nrow(x))[-VStrike.ind]
 
 # create character vectors of Vsize and VSpeed for use with grep, grepl, or regexpr
 
@@ -180,12 +175,11 @@
 
        VLg.strings <- paste(c(VLg.strings, More.VLg.strings), sep=",", collapse="|")
 
-       VSzUnk.ind <- grep(VSzUnk.strings, VData$Narrative, ignore.case=TRUE)
-       VSm.ind <- grep(VSm.strings, VData$Narrative, ignore.case=TRUE)
-       VLg.ind <- grep(VLg.strings, VData$Narrative, ignore.case=TRUE)
+# indices for known vessel size identified first as filter
+       VSm.ind <- grep(VSm.strings, x$Narrative, ignore.case=TRUE)
+       VLg.ind <- grep(VLg.strings, x$Narrative, ignore.case=TRUE)
 
-# Vessel Speed descriptions / definitions
-# VSpeed threshold is <= 10 kts and >10 kts
+# Vessel Speed descriptions / definitions VSpeed threshold is <= 10 kts and >10 kts
 
        VSlow <- all.values[all.values<=10]
        VFast <- all.values[all.values>10]
@@ -213,27 +207,20 @@
        More.VFast.strings <- c("wrapped around bow", "stuck on bow", "larger and faster than whale", "bow of a large ship", ">10kt", ">10 kt", ">10 knots")
        VFast.strings <- paste(c(VFast.strings, More.VFast.strings), sep=",", collapse="|")
 
-       VSpdUnk.ind <- grep(VSpdUnk.strings, VData$Narrative, ignore.case=TRUE)
-       VSlow.ind <- grep(VSlow.strings, VData$Narrative, ignore.case=TRUE)
-       VFast.ind <- grep(VFast.strings, VData$Narrative, ignore.case=TRUE)
-
-       VessSz <- rep(NA, nrow(VData))
-       VessSpd <- rep(NA, nrow(VData))
-
-       VessSz[VSzUnk.ind] <- "VSzUnk"
-       VessSpd[VSpdUnk.ind] <- "VSpdUnk"
-
-       VessSz[VSm.ind] <- "VSzSmall"
-       VessSpd[VSlow.ind] <- "VSpdSlow"
+       VSlow.ind <- grep(VSlow.strings, x$Narrative, ignore.case=TRUE)
+       VFast.ind <- grep(VFast.strings, x$Narrative, ignore.case=TRUE)
 
        VessSz[VLg.ind] <- "VSzLarge"
+       VessSz[VSm.ind] <- "VSzSmall"
+
        VessSpd[VFast.ind] <- "VSpdFast"
+       VessSpd[VSlow.ind] <- "VSpdSlow"
 
-       VessSz[which(is.na(VessSz==TRUE))] <- "VSzUnk"
-       VessSpd[which(is.na(VessSpd==TRUE))] <- "VSpdUnk"
+# overwrite entanglement 'CAUSE=EN' records with unknown vessel sizes / speeds
 
-       VData <- cbind.data.frame(VData, VessSz, VessSpd)
-       NotVData <- x[NotVStrike.ind,]
+       EN.ind <- which(x$CAUSE=="EN")
+       VessSz[EN.ind] <- "VSzUnk"
+       VessSpd[EN.ind] <- "VSpdUnk"
 
 # narratives in conflict for size and speed (addressed by assigning more severe speed / size
 # category in 'Narrative'. Example: cases where size and speed of vessel are described as
@@ -244,18 +231,7 @@
 # indexed first and narratives that contain matches between unknown and unknown categories are
 # assigned the known category last (Fast supercedes Unknown and Slow, Large supercedes Unknown and Small)
 
-       Small.In.Large.conflict <- stats::na.omit(match(VSm.ind, VLg.ind))
-       Slow.In.Fast.conflict <- stats::na.omit(match(VSlow.ind, VFast.ind))
 
-       ConflictVSize <- VData[VLg.ind[Small.In.Large.conflict],]
-       ConflictVSpd <- VData[VFast.ind[Slow.In.Fast.conflict],]
-
-       # assign unknown VessSz, VessSpd for non-vessel strike data
-       VessSz <- rep("VSzUnk", nrow(NotVData))
-       VessSpd <- rep("VSpdUnk", nrow(NotVData))
-       NotVData <- cbind.data.frame(NotVData, VessSz, VessSpd)
-
-       df <- rbind.data.frame(VData, NotVData)
-       df
-   }
-
+       df <- cbind.data.frame(x, anchored, calf.juv, constricting, decline, extensive.severe, fluke.peduncle, gear.free, head, healing,
+                             laceration.deep, laceration.shallow, pectoral, swim.dive, trailing, VessSpd, VessSz, wraps.multi, wraps.no)
+       df   }
