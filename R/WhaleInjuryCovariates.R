@@ -26,7 +26,7 @@
 
    WhaleInjuryCovariates = function(x) {
 
-# 09-18-2021
+# 12-27-2021
 # Covariates defined below, starting with covariate = 'anchored'
 # Multiple words/phrases may be pooled into a single covariate, e.g. the covariate 'decline'
 # includes narrative words/phrases 'cyamid', 'whale lice', 'emaciation', 'skin discoloration', etc.
@@ -70,7 +70,7 @@
 
 #  Evidence that whale is now gear-free after initial sighting? Or is expected to shed loose gear?
 
-     gear.free = grepl("gear free|shed|gear-free|no gear present", x$Narrative, ignore.case=TRUE)
+     gear.free = grepl("gear free|shed|gear-free|no gear present|complete removal of gear|free of gear|self release|disentangled|removal of all gear", x$Narrative, ignore.case=TRUE)
       gear.free = as.numeric(lapply(gear.free, as.numeric))
 
 # Injury involved head, rostrum, or mouth?
@@ -200,7 +200,7 @@
               speed of vessel unknown")
 
        VSlow.strings <- paste(c(VSlow1, VSlow2, VSlow3, VSlow4), sep=",", collapse="|")
-       More.VSlow.strings <- paste("<10kt", "<10 kt", "<=10 kt", "<10 knots", sep="", collapse="|")
+       More.VSlow.strings <- paste("<10kt", "<10 kt", "<=10 kt", "<10 knots", "stationary", "steerage", sep="", collapse="|")
        VSlow.strings <- paste(c(VSlow.strings, More.VSlow.strings), sep=",", collapse="|")
 
        VFast.strings <- paste(c(VFast1, VFast2, VFast3, VFast4, VFast5), sep=",", collapse="|")
