@@ -11,7 +11,8 @@
 #' Resulting data.frame is used with randomForest models to predict
 #' health status of whales involved in entanglements or vessel strikes.
 #'
-#' Package includes data.frame 'LargeWhaleData'
+#' Package includes example data.frame 'whales'
+#' (n=20 records) for use with WhaleInjuryCovariates
 #'
 #' @usage
 #' WhaleInjuryCovariates(x)
@@ -26,7 +27,7 @@
 
    WhaleInjuryCovariates = function(x) {
 
-# 12-27-2021
+# 01-02-2022
 # Covariates defined below, starting with covariate = 'anchored'
 # Multiple words/phrases may be pooled into a single covariate, e.g. the covariate 'decline'
 # includes narrative words/phrases 'cyamid', 'whale lice', 'emaciation', 'skin discoloration', etc.
