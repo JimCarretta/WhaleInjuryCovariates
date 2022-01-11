@@ -55,7 +55,7 @@
 
 # Evidence of a health decline?
     decline = grepl(" abnormal|chronic|deteriorat|fair|compromise|scoliosis|deform|cyamid|lice|lethargic|lesion|discolor|diatom|
-                      poor cond|poor health|poor body|poor over|poor skin|rake|skin|slough|thin |emaciated|malnourish|underweight|
+                      parasite|poor cond|poor health|poor body|poor over|poor skin|rake|skin|slough|thin |emaciated|malnourish|underweight|
                       starv|mobility", x$Narrative, ignore.case=TRUE)
      decline = as.numeric(lapply(decline, as.numeric))
 
