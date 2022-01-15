@@ -27,7 +27,7 @@
 
    WhaleInjuryCovariates = function(x) {
 
-# 01-02-2022
+# 01-14-2022
 # Covariates defined below, starting with covariate = 'anchored'
 # Multiple words/phrases may be pooled into a single covariate, e.g. the covariate 'decline'
 # includes narrative words/phrases 'cyamid', 'whale lice', 'emaciation', 'skin discoloration', etc.
@@ -71,7 +71,7 @@
 
 #  Evidence that whale is now gear-free after initial sighting? Or is expected to shed loose gear?
 
-     gear.free = grepl("gear free|shed|gear-free|no gear present|complete removal of gear|free of gear|self release|disentangled|removal of all gear", x$Narrative, ignore.case=TRUE)
+     gear.free = grepl("gear free|shed|gear-free|no gear present|complete removal of gear|free of gear|self release|disentangled|removal of all gear|no gear remaining", x$Narrative, ignore.case=TRUE)
       gear.free = as.numeric(lapply(gear.free, as.numeric))
 
 # Injury involved head, rostrum, or mouth?
