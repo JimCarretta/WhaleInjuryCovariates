@@ -27,7 +27,7 @@
 
    WhaleInjuryCovariates = function(x) {
 
-# 01-14-2022
+# 01-23-2022
 # Covariates defined below, starting with covariate = 'anchored'
 # Multiple words/phrases may be pooled into a single covariate, e.g. the covariate 'decline'
 # includes narrative words/phrases 'cyamid', 'whale lice', 'emaciation', 'skin discoloration', etc.
@@ -235,4 +235,11 @@
 
        df <- cbind.data.frame(x, anchored, calf.juv, constricting, decline, extensive.severe, fluke.peduncle, gear.free, head, healing,
                              laceration.deep, laceration.shallow, pectoral, swim.dive, trailing, VessSpd, VessSz, wraps.multi, wraps.no)
+
+       df$VessSpd <- factor(df$VessSpd)
+       df$VessSz <- factor(df$VessSz)
+
+       levels(df$VessSpd) <- c(levels(df$VessSpd), "VSpdUnk", "VSpdSlow", "VSpdFast")
+       levels(df$VessSz) <- c(levels(df$VessSz), "VSzUnk", "VSzLarge", "VSzSmall")
+
        df   }
