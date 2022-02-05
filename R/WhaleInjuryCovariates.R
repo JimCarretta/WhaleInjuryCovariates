@@ -146,7 +146,7 @@
 
        VSzUnk.strings <- c("unable to determine vessel size|vessel size unknown|
                           unknown vessel size|size of vessel undetermined|vessel size
-                          and speed unknown")
+                          and speed unknown|size unk|unk size")
 
        VSm1 <- paste(" ", VSm, "ft", sep="", collapse="|")
        VSm2 <- paste(" ", VSm, " ft", sep="", collapse="|")
@@ -198,7 +198,7 @@
 
        VSpdUnk.strings <- c("speed unknown|unknown speed|no data on vessel size and speed|
             unknown vessel size and speed|vessel size and speed unknown|unknown size and speed|
-              speed of vessel unknown")
+              speed of vessel unknown|speed unk|unk speed")
 
        VSlow.strings <- paste(c(VSlow1, VSlow2, VSlow3, VSlow4), sep=",", collapse="|")
        More.VSlow.strings <- paste("<10kt", "<10 kt", "<=10 kt", "<10 knots", "stationary", "steerage", sep="", collapse="|")
