@@ -61,7 +61,7 @@
 
 # 'Extensive or Severe' case resulting from entanglement or vessel strike?
 
-     extensive.severe = grepl("extensive|severe|substantial|massive|amputat", x$Narrative, ignore.case=TRUE)
+     extensive.severe = grepl("extensive|severe|substantial|massive|amputat|major", x$Narrative, ignore.case=TRUE)
       extensive.severe = as.numeric(lapply(extensive.severe, as.numeric))
 
 # Did injury involve fluke or peduncle area?
@@ -99,7 +99,7 @@
 
 # Evidence whale is / was healing / recovering?
 
-      healing = grepl("healing|healed|healthy.*resight|resight.*healthy|good health", x$Narrative, ignore.case=TRUE)
+      healing = grepl("healing|healed|healthy.*resight|resight.*healthy|good health|minor|no visible injur|no injur", x$Narrative, ignore.case=TRUE)
        healing = as.numeric(lapply(healing, as.numeric))
 
 # Did injury involve flipper/pectoral?
