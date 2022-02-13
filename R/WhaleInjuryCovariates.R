@@ -114,7 +114,7 @@
        swim.dive = as.numeric(lapply(swim.dive, as.numeric))
 
 # Was whale trailing gear?
-       trailing = grepl("trail|towing|drag|feet behind|ft behind", x$Narrative, ignore.case=TRUE)
+       trailing = grepl("trail|towing|drag|feet behind|ft behind|behind whale|behind animal|behind the whale", x$Narrative, ignore.case=TRUE)
         trailing = as.numeric(lapply(trailing, as.numeric))
 
 # Whale has wraps of gear (none or multiple?)
