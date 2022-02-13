@@ -171,11 +171,12 @@
 
        VLg.strings <- paste(c(VLg1, VLg2, VLg3, VLg4, VLg5), sep=",", collapse="|")
 
-       More.VLg.strings <- c(" >65", "container ship", "size much greater than whale",
+       More.VLg.strings <- c(" >65", "> 65", "container ship", "size much greater than whale",
                              "in excess of 65 ft", "cruise ship", "navy", "transport",
                              "ferry", "express", "vessel larger than whale", "assumed to be larger",
                              "much larger than the whale", "wrapped around bow", "bow of a large ship",
-                             "larger and faster than whale", "wrapped around bow", "large ship")
+                             "larger and faster than whale", "wrapped around bow", "brought into",
+                             "freight", "large ship")
 
        VLg.strings <- paste(c(VLg.strings, More.VLg.strings), sep=",", collapse="|")
 
@@ -214,11 +215,11 @@
        VSlow.ind <- grep(VSlow.strings, x$Narrative, ignore.case=TRUE)
        VFast.ind <- grep(VFast.strings, x$Narrative, ignore.case=TRUE)
 
-       VessSz[VLg.ind] <- "VSzLarge"
        VessSz[VSm.ind] <- "VSzSmall"
+       VessSz[VLg.ind] <- "VSzLarge"
 
-       VessSpd[VFast.ind] <- "VSpdFast"
        VessSpd[VSlow.ind] <- "VSpdSlow"
+       VessSpd[VFast.ind] <- "VSpdFast"
 
 # overwrite entanglement 'CAUSE=EN' records with unknown vessel sizes / speeds
 
