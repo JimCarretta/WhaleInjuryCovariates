@@ -10,10 +10,10 @@ Narrative = c("event added 2014. WW Voyager III hit a whale. Vessel drifting/slo
 
 x <- as.data.frame(Narrative)
 
-grepl("small.*laceration|laceration.*small", x$Narrative, ignore.case=TRUE)
 
-grepl("small.*laceration|
-      laceration.*small", x$Narrative, ignore.case=TRUE)
+grepl("shallow.*laceration|laceration.*shallow|minor.*laceration|laceration.*minor
+ |superficial.*laceration|laceration.*superficial|heal.*laceration|laceration.*heal
+  |small.*laceration|laceration.*small", x$Narrative, ignore.case=TRUE)
 
 grepl("shallow.*laceration|laceration.*shallow|minor.*laceration|laceration.*minor|
  superficial.*laceration|laceration.*superficial|heal.*laceration|laceration.*heal|
