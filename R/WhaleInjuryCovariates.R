@@ -27,7 +27,7 @@
 
    WhaleInjuryCovariates = function(x) {
 
-# 02-08-2022
+# 02-14-2022
 # Covariates defined below, starting with covariate = 'anchored'
 # Multiple words/phrases may be pooled into a single covariate, e.g. the covariate 'decline'
 # includes narrative words/phrases 'cyamid', 'whale lice', 'emaciation', 'skin discoloration', etc.
@@ -78,12 +78,12 @@
 
 # Injury involved head, rostrum, or mouth?
 
-      head = grepl("head|baleen|mouth|rostrum|lips", x$Narrative, ignore.case=TRUE)
+      head = grepl("head|baleen|mouth|rostrum|lips|jaw", x$Narrative, ignore.case=TRUE)
        head = as.numeric(lapply(head, as.numeric))
 
 # Deep laceration?
 
-      laceration.deep = grepl("deep.*laceration|laceration.*deep|laceration.*muscle|muscle.*laceration|laceration.*blubber|blubber.*laceration|
+      laceration.deep = grepl("deep.*laceration|laceration.*deep|muscle|laceration.*blubber|blubber.*laceration|
                               laceration.*artery|artery.*laceration|laceration.*arteri|arteri.*laceration|laceration.*massive|
                               massive.*laceration|laceration.*penetrat|penetrat.*laceration|laceration.*necrotic|necrotic.*laceration|
                               large.*laceration|laceration.*large|laceration.*propell|propell.*laceration|deep.*propel|propel.*deep",
@@ -98,6 +98,12 @@
                                  small.*laceration|laceration.*small", x$Narrative, ignore.case=TRUE)
 
       laceration.shallow = as.numeric(lapply(laceration.shallow, as.numeric))
+
+# Deep vs Shallow laceration is hierarchical. A whale with both gets coded for a deep laceration.
+# A whale with a healing laceration may have initially had a deep laceration. It is coded as deep.
+
+      deep.lac.pos = which(laceration.deep==1)  # index cases with deep lacerations
+      laceration.shallow[deep.lac.pos] = 0      # recode indexed shallow cases as zeroes
 
 # Evidence whale is / was healing / recovering?
 
