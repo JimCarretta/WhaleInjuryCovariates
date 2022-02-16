@@ -42,100 +42,120 @@
 # while phrases as 'partially disentangled' and 'partial disentanglement' are handled by grepl("partial.*disentangl)
 
 # Evidence the whale was anchored or had limited mobility resulting from an entanglement?
-   anchored = grepl("anchor|motionless|mobility|unable to move|stationary|entrap
-                    |weighted|using flippers only|difficultly spending time at surface|could not freely swim", x$Narrative, ignore.case=TRUE)
-    anchored = as.numeric(lapply(anchored, as.numeric))
+ anchored = paste(c("anchor","motionless","mobility","unable to move","stationary whale",
+                    "entrap", "whale was stationary", "animal was stationary", "stationary animal",
+                    "weighted","using flippers only","difficultly spending time at surface",
+                    "could not freely swim"), collapse="|")
+
+ anchored = grepl(anchored, x$Narrative, ignore.case=TRUE)
+
+ anchored = as.numeric(lapply(anchored, as.numeric))
 
 # Was a calf, juvenile or lactating mother involved in the case?
-    calf.juv = grepl("calf|juvenile|young|dependent", x$Narrative, ignore.case=TRUE)
+ calf.juv = paste(c("calf","juvenile","young","dependent"), collapse="|")
+    calf.juv = grepl(calf.juv, x$Narrative, ignore.case=TRUE)
      calf.juv = as.numeric(lapply(calf.juv, as.numeric))
 
 # Evidence of constricting entanglement?
-     constricting = grepl("constricting|deep cut|tight|cutting|impress|embed|pinn
-                          |twisted|necrotic|amputat|missing.*fluke|fluke.*missing", x$Narrative, ignore.case=TRUE)
-      constricting = as.numeric(lapply(constricting, as.numeric))
+ constricting = paste(c("constricting", "deep cut", "tight", "cutting", "impress", "embed", "pinn",
+                        "twisted", "necrotic", "amputat", "missing.*fluke", "fluke.*missing", "severed"), collapse="|")
+
+ constricting = grepl(constricting, x$Narrative, ignore.case=TRUE)
+ constricting = as.numeric(lapply(constricting, as.numeric))
 
 # Evidence of a health decline?
-    decline = grepl(" abnormal|chronic|deteriorat|fair|compromise|scoliosis|deform|cyamid|lice
-                    |lethargic|lesion|discolor|diatom|parasite|poor cond|poor health|poor body
-                    |poor over|poor skin|rake|skin|slough|thin |emaciated|malnourish|underweight|starv", x$Narrative, ignore.case=TRUE)
-     decline = as.numeric(lapply(decline, as.numeric))
+ decline = paste(c(" abnormal","chronic","deteriorat","fair cond","fair body","body condition fair","compromise",
+                   "scoliosis","deform","cyamid","lice","lethargic","lesion","discolor","diatom","parasite","poor cond",
+                   "poor health", "poor body", "poor over","poor skin","rake","discolored skin","skin discolor",
+                   "slough", "thin ", "emaciat", "malnourish", "underweight", "starv"), collapse="|")
+
+ decline = grepl(decline, x$Narrative, ignore.case=TRUE)
+ decline = as.numeric(lapply(decline, as.numeric))
 
 # 'Extensive or Severe' case resulting from entanglement or vessel strike?
-
-     extensive.severe = grepl("extensive|severe|substantial|massive|amputat|major", x$Narrative, ignore.case=TRUE)
+ extensive.severe = paste(c("extensive","severe","severed","substantial","massive","amputat","major","missing fluke"), collapse="|")
+     extensive.severe = grepl(extensive.severe, x$Narrative, ignore.case=TRUE)
       extensive.severe = as.numeric(lapply(extensive.severe, as.numeric))
 
 # Did injury involve fluke or peduncle area?
-
-      fluke.peduncle = grepl("fluke|peduncle|tail", x$Narrative, ignore.case=TRUE)
-      fluke.peduncle = as.numeric(lapply(fluke.peduncle, as.numeric))
+ fluke.peduncle = paste(c("fluke","peduncle","tail"), collapse="TRUE")
+      fluke.peduncle = grepl(fluke.peduncle, x$Narrative, ignore.case=TRUE)
+       fluke.peduncle = as.numeric(lapply(fluke.peduncle, as.numeric))
 
 #  Evidence that whale is now gear-free after initial sighting? Or is expected to shed loose gear?
+ gear.free = paste(c("gear free", "shed", "gear-free", "no gear present", "complete removal of gear",
+                      "free of gear", "self.*release", "disentangled", "removal of all gear",
+                       "no gear remaining", "all gear removed"), collapse="|")
 
-     gear.free = grepl("gear free|shed|gear-free|no gear present|complete removal of gear
-                       |free of gear|self release|disentangled|removal of all gear
-                       |no gear remaining|all gear removed", x$Narrative, ignore.case=TRUE)
-      gear.free = as.numeric(lapply(gear.free, as.numeric))
+ gear.free = grepl(gear.free, x$Narrative, ignore.case=TRUE)
+  gear.free = as.numeric(lapply(gear.free, as.numeric))
 
 # Injury involved head, rostrum, or mouth?
-
-      head = grepl("head|baleen|mouth|rostrum|lips|jaw", x$Narrative, ignore.case=TRUE)
+ head = paste(c("head","baleen","mouth","rostrum","lips"," lip ", "jaw","blowhole","nares"), collapse="|")
+      head = grepl(head, x$Narrative, ignore.case=TRUE)
        head = as.numeric(lapply(head, as.numeric))
 
 # Deep laceration?
+ laceration.deep = paste(c("deep.*laceration", "laceration.*deep", "muscle", "laceration.*blubber",
+                              "blubber.*laceration", "laceration.*artery", "artery.*laceration",
+                              "laceration.*arteri", "arteri.*laceration", "laceration.*massive",
+                              "massive.*laceration", "laceration.*penetrat", "penetrat.*laceration",
+                              "laceration.*necrotic", "necrotic.*laceration", "large.*laceration",
+                              "laceration.*large", "laceration.*propell", "propell.*laceration",
+                              "deep.*propel", "propel.*deep"), collapse="|")
 
-      laceration.deep = grepl("deep.*laceration|laceration.*deep|muscle|laceration.*blubber
-                              |blubber.*laceration|laceration.*artery|artery.*laceration
-                              |laceration.*arteri|arteri.*laceration|laceration.*massive
-                              |massive.*laceration|laceration.*penetrat|penetrat.*laceration
-                              |laceration.*necrotic|necrotic.*laceration|large.*laceration
-                              |laceration.*large|laceration.*propell|propell.*laceration
-                              |deep.*propel|propel.*deep", x$Narrative, ignore.case=TRUE)
-
-      laceration.deep = as.numeric(lapply(laceration.deep, as.numeric))
+ laceration.deep = grepl(laceration.deep, x$Narrative, ignore.case=TRUE)
+ laceration.deep = as.numeric(lapply(laceration.deep, as.numeric))
 
 # Shallow laceration?
+ laceration.shallow = paste(c("shallow.*laceration","laceration.*shallow","minor.*laceration",
+                       "laceration.*minor", "superficial.*laceration", "laceration.*superficial", "heal.*laceration",
+                       "laceration.*heal", "small.*laceration","laceration.*small"), collapse="|")
 
-      laceration.shallow = grepl("shallow.*laceration|laceration.*shallow|minor.*laceration|laceration.*minor
-                                 |superficial.*laceration|laceration.*superficial|heal.*laceration|laceration.*heal
-                                 |small.*laceration|laceration.*small", x$Narrative, ignore.case=TRUE)
-       laceration.shallow = as.numeric(lapply(laceration.shallow, as.numeric))
+ laceration.shallow = grepl(laceration.shallow, x$Narrative, ignore.case=TRUE)
+ laceration.shallow = as.numeric(lapply(laceration.shallow, as.numeric))
 
 # Deep vs Shallow laceration is hierarchical. A whale with both gets coded for a deep laceration.
 # A whale with a healing laceration may have initially had a deep laceration. It is coded as deep.
+# index cases with deep lacerations and recode previously-indexed shallow lacerations as zeroes
 
-      deep.lac.pos = which(laceration.deep==1)  # index cases with deep lacerations
-      laceration.shallow[deep.lac.pos] = 0      # recode indexed shallow cases as zeroes
+ deep.lac.pos = which(laceration.deep==1)
+ laceration.shallow[deep.lac.pos] = 0
 
-# Evidence whale is / was healing / recovering?
+# Evidence whale is | was healing | recovering?
+ healing = paste(c("healing","healed","healthy.*resight","resight.*healthy","good health",
+                    "no visible injur","no injur"), collapse="|")
 
-      healing = grepl("healing|healed|healthy.*resight|resight.*healthy|good health
-                      |minor|no visible injur|no injur", x$Narrative, ignore.case=TRUE)
-       healing = as.numeric(lapply(healing, as.numeric))
+ healing = grepl(healing, x$Narrative, ignore.case=TRUE)
+ healing = as.numeric(lapply(healing, as.numeric))
 
 # Did injury involve flipper/pectoral?
-
-       pectoral = grepl("pectoral|flipper|pecs", x$Narrative, ignore.case=TRUE)
-        pectoral = as.numeric(lapply(pectoral, as.numeric))
+ pectoral = paste(c("pectoral","flipper","pecs"), collapse="|")
+   pectoral = grepl(pectoral, x$Narrative, ignore.case=TRUE)
+    pectoral = as.numeric(lapply(pectoral, as.numeric))
 
 # Narrative includes reference to swimming and / or diving whale?
-       swim.dive = grepl("free.*swimming|swimming.*free|swimming.*diving|diving.*swimming
-                         |swimming.*dove|dove.*swim|swam", x$Narrative, ignore.case=TRUE)
-       swim.dive = as.numeric(lapply(swim.dive, as.numeric))
+ swim.dive = paste(c("free.*swimming", "swimming.*free", "swimming.*diving", "diving.*swimming",
+                    "swimming.*dove", "dove.*swim", "swam"), collapse = "|")
+
+ swim.dive = grepl(swim.dive, x$Narrative, ignore.case=TRUE)
+ swim.dive = as.numeric(lapply(swim.dive, as.numeric))
 
 # Was whale trailing gear?
-       trailing = grepl("trail|towing|drag|feet behind|ft behind|behind whale|behind animal
-                        |behind the whale", x$Narrative, ignore.case=TRUE)
-        trailing = as.numeric(lapply(trailing, as.numeric))
+ trailing = paste(c("trail", "towing", "dragging", "feet behind", "ft behind", "behind whale",
+                 "behind.animal", "behind the whale", "towed gear"), collapse = "|")
+
+ trailing = grepl(trailing, x$Narrative, ignore.case=TRUE)
+ trailing = as.numeric(lapply(trailing, as.numeric))
 
 # Whale has wraps of gear (none or multiple?)
+ wraps.no = paste(c("no wrap"), collapse="|")
+ wraps.no = grepl(wraps.no, x$Narrative, ignore.case=TRUE)
+ wraps.no = as.numeric(lapply(wraps.no, as.numeric))
 
-        wraps.no = grepl("no wrap", x$Narrative, ignore.case=TRUE)
-        wraps.no = as.numeric(lapply(wraps.no, as.numeric))
-
-        wraps.multi = grepl("multiple wraps|several wraps", x$Narrative, ignore.case=TRUE)
-        wraps.multi = as.numeric(lapply(wraps.multi, as.numeric))
+ wraps.multi = paste(c("multiple wraps","several wraps","wrapped several","wrapped multiple"), collapse="|")
+ wraps.multi = grepl(wraps.multi, x$Narrative, ignore.case=TRUE)
+ wraps.multi = as.numeric(lapply(wraps.multi, as.numeric))
 
 # Begin vessel strike covariate section, append covariates to current data frame
 # Assign null Vessel Speed and Size factors as default filter to index from
@@ -212,9 +232,9 @@
        VFast4 <- paste(" ", VFast, " knots", sep="", collapse="|")
        VFast5 <- paste(VFast, " knots", sep="", collapse="|")
 
-       VSpdUnk.strings <- c("speed unknown|unknown speed|no data on vessel size and speed|
-            unknown vessel size and speed|vessel size and speed unknown|unknown size and speed|
-              speed of vessel unknown|speed unk|unk speed")
+       VSpdUnk.strings <- c("speed unknown|unknown speed|no data on vessel size and speed
+       |unknown vessel size and speed|vessel size and speed unknown|unknown size and speed
+       |speed of vessel unknown|speed unk|unk speed")
 
        VSlow.strings <- paste(c(VSlow1, VSlow2, VSlow3, VSlow4), sep=",", collapse="|")
        More.VSlow.strings <- paste("<10kt", "<10 kt", "<=10 kt", "<10 knots", "stationary", "steerage", sep="", collapse="|")
