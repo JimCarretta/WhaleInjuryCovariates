@@ -27,7 +27,7 @@
 
    WhaleInjuryCovariates = function(x) {
 
-# 02-15-2022
+# 02-16-2022
 # Covariates defined below, starting with covariate = 'anchored'
 # Multiple words/phrases may be pooled into a single covariate, e.g. the covariate 'decline'
 # includes narrative words/phrases 'cyamid', 'whale lice', 'emaciation', 'skin discoloration', etc.
@@ -42,10 +42,10 @@
 # while phrases as 'partially disentangled' and 'partial disentanglement' are handled by grepl("partial.*disentangl)
 
 # Evidence the whale was anchored or had limited mobility resulting from an entanglement?
- anchored = paste(c("anchor","motionless","mobility","unable to move","stationary whale",
-                    "entrap", "whale was stationary", "animal was stationary", "stationary animal",
-                    "weighted","using flippers only","difficultly spending time at surface",
-                    "could not freely swim"), collapse="|")
+ anchored = paste(c("anchor", "difficultly spending time at surface", "hog", "motionless",
+                    "mobility","unable to move","stationary whale", "entrap",
+                    "whale was stationary", "animal was stationary", "stationary animal",
+                    "weighted","using flippers only", "could not freely swim"), collapse="|")
 
  anchored = grepl(anchored, x$Narrative, ignore.case=TRUE)
 
@@ -124,7 +124,7 @@
 
 # Evidence whale is | was healing | recovering?
  healing = paste(c("healing","healed","healthy.*resight","resight.*healthy","good health",
-                    "no visible injur","no injur"), collapse="|")
+                    "no visible injur","no injur", "no noticeable injuries", " normal behavior"), collapse="|")
 
  healing = grepl(healing, x$Narrative, ignore.case=TRUE)
  healing = as.numeric(lapply(healing, as.numeric))
@@ -159,16 +159,16 @@
 
 # Begin vessel strike covariate section, append covariates to current data frame
 # Assign null Vessel Speed and Size factors as default filter to index from
-        VessSpd <- rep("VSpdUnk", nrow(x))
-        VessSz <- rep("VSzUnk", nrow(x))
+  VessSpd <- rep("VSpdUnk", nrow(x))
+  VessSz <- rep("VSzUnk", nrow(x))
 
 # Vessel Variables (VSize and VSpeed)
 #  Archive Vessel Size and Speed strings
 
 # identify character vector that includes all unique numeric values in data$Narrative
-       all.values <- unlist(regmatches(x$Narrative, gregexpr("[0-9]*\\.?[0-9]", x$Narrative)))
-       all.values <- as.character(unique(as.numeric(all.values)))
-       all.values <- as.numeric(sort(all.values))
+  all.values <- unlist(regmatches(x$Narrative, gregexpr("[0-9]*\\.?[0-9]", x$Narrative)))
+  all.values <- as.character(unique(as.numeric(all.values)))
+  all.values <- as.numeric(sort(all.values))
 
 # parse by vessel size (small, large) and speed (slow, fast) #####
 # omit VSm values==5 due to grep identifying '65' (vessel size threshold) as a longer case of '5'
