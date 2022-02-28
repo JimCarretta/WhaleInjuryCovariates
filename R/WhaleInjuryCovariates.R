@@ -78,7 +78,7 @@
       extensive.severe = as.numeric(lapply(extensive.severe, as.numeric))
 
 # Did injury involve fluke or peduncle area?
- fluke.peduncle = paste(c("fluke","peduncle","tail"), collapse="TRUE")
+ fluke.peduncle = paste(c("fluke","peduncle","tail"), collapse="|")
       fluke.peduncle = grepl(fluke.peduncle, x$Narrative, ignore.case=TRUE)
        fluke.peduncle = as.numeric(lapply(fluke.peduncle, as.numeric))
 
