@@ -23,8 +23,26 @@
 #'
 #' @examples WhaleInjuryCovariates(WhaleData)
 #'
+#' @import ggplot2
+#' @import graphics
+#' @import grid
+#' @import rfPermute
+#' @import utils
+#'
 #' @export
+#'
+#'
+  WhaleInjuryTutorial <- function() {
+  browseURL(system.file("extdata", "WhaleInjuryCovariatesTutorial.pdf", package="WhaleInjuryCovariates", mustWork=TRUE))
+}
 
+.onAttach <- function(libname, pkgname) {
+  packageStartupMessage(
+    "Welcome to WhaleInjuryCovariates v", utils::packageVersion("WhaleInjuryCovariates"), "\n",
+    "See WhaleInjuryTutorial() for a guide to the package."
+  )
+
+}
    WhaleInjuryCovariates = function(x) {
 
 # 02-16-2022
