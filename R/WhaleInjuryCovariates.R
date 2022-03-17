@@ -22,6 +22,7 @@
 #' @author Jim Carretta <jim.carretta@noaa.gov>
 #'
 #' @examples WhaleInjuryCovariates(WhaleData)
+#' @examples WhaleInjuryTutorial()
 #'
 #' @import ggplot2
 #' @import graphics
