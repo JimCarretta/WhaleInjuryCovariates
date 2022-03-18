@@ -16,6 +16,7 @@
 #'
 #' @usage
 #' WhaleInjuryCovariates(x)
+#' WhaleInjuryTutorial()
 #'
 #' @param x an object of class 'data.frame'
 #'
