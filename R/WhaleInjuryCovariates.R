@@ -11,9 +11,6 @@
 #' Resulting data.frame is used with randomForest models to predict
 #' health status of whales involved in entanglements or vessel strikes.
 #'
-#' Package includes example data.frame 'whales'
-#' (n=20 records) for use with WhaleInjuryCovariates
-#'
 #' @usage
 #' WhaleInjuryCovariates(x)
 #' WhaleInjuryTutorial()
