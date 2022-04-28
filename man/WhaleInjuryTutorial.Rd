@@ -5,6 +5,7 @@
 \title{WhaleInjuryCovariates()}
 \usage{
 WhaleInjuryCovariates(x)
+WhaleInjuryTutorial()
 }
 \arguments{
 \item{x}{an object of class 'data.frame'}
@@ -19,9 +20,6 @@ Append to new data.frame with function WhaleInjuryCovariates().
 
 Resulting data.frame is used with randomForest models to predict
 health status of whales involved in entanglements or vessel strikes.
-
-Package includes example data.frame 'whales'
-(n=20 records) for use with WhaleInjuryCovariates
 }
 \examples{
 WhaleInjuryCovariates(WhaleData)
