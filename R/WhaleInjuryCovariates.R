@@ -12,7 +12,7 @@
 #' health status of whales involved in entanglements or vessel strikes.
 #'
 #' @usage
-#' WhaleInjuryCovariates(x)
+#' WhaleInjuryCovariates(WhaleData)
 #' WhaleInjuryTutorial()
 #'
 #' @param x an object of class 'data.frame'

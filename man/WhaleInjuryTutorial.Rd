@@ -4,7 +4,7 @@
 \alias{WhaleInjuryTutorial}
 \title{WhaleInjuryCovariates()}
 \usage{
-WhaleInjuryCovariates(x)
+WhaleInjuryCovariates(WhaleData)
 WhaleInjuryTutorial()
 }
 \arguments{
