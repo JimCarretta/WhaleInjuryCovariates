@@ -2,6 +2,7 @@ Package: WhaleInjuryCovariates
 Type: Package
 Title: Define and Append Whale Injury Covariates to dataframe
 Version: 1.1.0
+Depends: ggplot2, graphics, grid, rfPermute, utils, rlang
 Author: Jim Carretta
 Maintainer: Jim Carretta <jim.carretta@noaa.gov>
 Description: Use Injury Narratives to Define, Create and Append 

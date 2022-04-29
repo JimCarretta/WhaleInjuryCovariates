@@ -2,13 +2,14 @@
 % Please edit documentation in R/WhaleInjuryCovariates.R
 \name{WhaleInjuryTutorial}
 \alias{WhaleInjuryTutorial}
-\title{WhaleInjuryCovariates()}
+\title{R-Package WhaleInjuryCovariates}
 \usage{
 WhaleInjuryCovariates(WhaleData)
+
 WhaleInjuryTutorial()
 }
 \arguments{
-\item{x}{an object of class 'data.frame'}
+\item{df}{an object of class 'data.frame'}
 }
 \description{
 Identify Covariates for Whale Injury Assessments from
@@ -22,7 +23,9 @@ Resulting data.frame is used with randomForest models to predict
 health status of whales involved in entanglements or vessel strikes.
 }
 \examples{
+
 WhaleInjuryCovariates(WhaleData)
+
 WhaleInjuryTutorial()
 
 }
