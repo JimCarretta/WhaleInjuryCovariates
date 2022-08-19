@@ -131,7 +131,7 @@
  laceration.shallow[deep.lac.pos] = 0
 
 # Evidence whale is | was healing | recovering?
- healing = paste(c("healing","healed","healthy.*resight","resight.*healthy","good health",
+ healing = paste(c(" healthy", "healing","healed","healthy.*resight","resight.*healthy","good health",
                     "no visible injur","no injur", "no noticeable injuries", " normal behavior"), collapse="|")
 
  healing = grepl(healing, df$Narrative, ignore.case=TRUE)
